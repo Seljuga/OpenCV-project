@@ -1,30 +1,26 @@
-
 # OpenCV Django Demo
 
-Ovaj projekt prikazuje jednostavnu integraciju OpenCV obrade slike (detekcija ljudi) s Django web aplikacijom.
+This project uses simple OpenCV integration for object detection (people in this specific case) and is combined with Django web application.
 
-## 📦 Sadržaj
-- `opencv_django_demo/` – Python modul za obradu slike
-- `opencv_site/` – Django projekt s upload formom i prikazom rezultata
+## Content
+- `opencv_django_demo/` – Python module for image processing
+- `opencv_site/` – Django project for showing image processing results
 
-## 🚀 Pokretanje
-1. Instaliraj ovisnosti:
+## Running
+1. Install requirements:
 ```bash
 pip install -r requirements.txt
 ```
 
-2. Pokreni Django server:
+2. Running Django server:
 ```bash
 cd opencv_site
 python manage.py runserver
 ```
 
-3. Posjeti `http://127.0.0.1:8000/` i testiraj upload slike.
+3. Use `http://127.0.0.1:8000/` adress to test the image upload.
 
 ## 🧠 OpenCV funkcionalnost
-Koristi HOG + SVM za detekciju ljudi na slici i vraća sliku s označenim osobama.
-
-## 📂 Media folder
-Rezultati se spremaju u `media/processed/`. Django automatski servira taj sadržaj preko `MEDIA_URL`.
-
-Uživaj u demonstraciji!
+OpenCV uses two approaches:
+- HOG + SVM
+- YOLOv8
