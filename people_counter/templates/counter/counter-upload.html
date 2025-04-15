@@ -1,0 +1,58 @@
+{% extends 'base/base.html' %}
+
+{% block page_content %}
+
+    <h2 class="mb-4">Upload image for counting people</h2>
+
+    <form method="post" enctype="multipart/form-data">
+        {% csrf_token %}
+
+        <div id="upload-area" class="upload-box mb-3">
+            <p>📁 Drag & Drop your image here or click to browse</p>
+            <input type="file" name="image" id="image" accept="image/*" class="form-control" hidden required>
+        </div>
+
+        <button type="submit" class="btn btn-success">Upload & Analyze</button>
+    </form>
+
+    <script>
+        const uploadArea = document.getElementById('upload-area');
+        const fileInput = document.getElementById('image');
+
+        // Click opens file browser
+        uploadArea.addEventListener('click', () => fileInput.click());
+
+        // File selection handler
+        fileInput.addEventListener('change', () => {
+            const file = fileInput.files[0];
+            if (file && file.type.startsWith('image/')) {
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+            }
+        });
+
+        // Drag events
+        uploadArea.addEventListener('dragover', e => {
+            e.preventDefault();
+            uploadArea.classList.add('dragover');
+        });
+
+        uploadArea.addEventListener('dragleave', () => {
+            uploadArea.classList.remove('dragover');
+        });
+
+        uploadArea.addEventListener('drop', e => {
+            e.preventDefault();
+            uploadArea.classList.remove('dragover');
+            const file = e.dataTransfer.files[0];
+            if (file && file.type.startsWith('image/')) {
+                fileInput.files = e.dataTransfer.files;
+
+                const reader = new FileReader();
+                reader.readAsDataURL(file);
+            }
+        });
+    </script>
+
+
+{% endblock page_content %}

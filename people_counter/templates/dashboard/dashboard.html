@@ -1,0 +1,42 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+    <h2>Counting Results</h2>
+
+    {% for counting_result in counting_results %}
+        <div style="border: 1px solid #ccc; margin-bottom: 20px; padding: 10px;">
+            <p><strong>Uploaded:</strong> {{ counting_result.created_at|date:"Y-m-d H:i" }}</p>
+
+            <table>
+                <tr>
+                    <td><strong>Original</strong><br>
+                        <img src="{{ counting_result.original_file.url }}" width="150">
+                    </td>
+
+                    <td>
+                        <strong>YOLO</strong><br>
+                        {% if counting_result.yolo_processed_file %}
+                            <img src="{{ counting_result.yolo_processed_file.url }}" width="150"><br>
+                            Detected: {{ counting_result.yolo_people_counted }}
+                        {% else %}
+                            Not processed
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        <strong>HOG</strong><br>
+                        {% if counting_result.hog_processed_file %}
+                            <img src="{{ counting_result.hog_processed_file.url }}" width="150"><br>
+                            Detected: {{ counting_result.hog_people_counted }}
+                        {% else %}
+                            Not processed
+                        {% endif %}
+                    </td>
+                </tr>
+            </table>
+            <div class="mt-2">
+                <a href="{% url 'dashboard:details' counting_result.pk %}" class="btn btn-outline-primary">View Details</a>
+            </div>
+        </div>
+    {% endfor %}
+
+{% endblock page_content %}

@@ -1,0 +1,41 @@
+{% extends 'base/base.html' %}
+{% block page_content %}
+
+    <h2>Detection Detail</h2>
+
+    <p><strong>Uploaded:</strong> {{ counting_results.created_at|date:"Y-m-d H:i" }}</p>
+
+    <hr>
+
+    <div class="row mb-4">
+        <div class="col">
+            <h5>Original Image</h5>
+            <img src="{{ counting_results.original_file.url }}" class="img-fluid rounded border">
+        </div>
+    </div>
+
+    <div class="row mb-4">
+        <div class="col-md-6">
+            <h5>YOLO Processed</h5>
+            {% if counting_results.yolo_processed_file %}
+                <img src="{{ counting_results.yolo_processed_file.url }}" class="img-fluid rounded border">
+                <p class="mt-2">People Detected: <strong>{{ counting_results.yolo_people_counted }}</strong></p>
+            {% else %}
+                <p>Not processed.</p>
+            {% endif %}
+        </div>
+
+        <div class="col-md-6">
+            <h5>HOG Processed</h5>
+            {% if counting_results.hog_processed_file %}
+                <img src="{{ counting_results.hog_processed_file.url }}" class="img-fluid rounded border">
+                <p class="mt-2">People Detected: <strong>{{ counting_results.hog_people_counted }}</strong></p>
+            {% else %}
+                <p>Not processed.</p>
+            {% endif %}
+        </div>
+    </div>
+
+    <a href="{% url 'dashboard:dashboard' %}" class="btn btn-secondary mt-3">← Back to list of results</a>
+
+{% endblock page_content %}

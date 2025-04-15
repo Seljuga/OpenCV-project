@@ -4,7 +4,7 @@ This project uses simple OpenCV integration for object detection (people in this
 
 ## Content
 - `opencv_django_demo/` – Python module for image processing
-- `opencv_site/` – Django project for showing image processing results
+- `people_counter/` – Django project for showing image processing results
 
 ## Running
 1. Install requirements:
